@@ -11,13 +11,16 @@ package pokerserver;
  */
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
 
 public class PokerServer {
     
+    //creating an array list
+    ArrayList cards = new ArrayList();
+    
     void creatingCards(){
-        
-        //creating an array list
-        ArrayList cards = new ArrayList();
         
         for(int i=0;i<4;i++){
             //there are 4 types of cards spades,clubs,diamods,hearts
@@ -60,12 +63,26 @@ public class PokerServer {
             }
         }
         
+        /*for(int i=0;i<52;i++){
+            Cards a = (Cards)cards.get(i);
+            System.out.print(a.cnumber);
+            System.out.println(a.ctype);
+        }*/
+        
+    }
+    
+    void randomizingCards(){
+        //randomizing arraylist - cards / shuffling
+        long seed = System.nanoTime();
+        Collections.shuffle(cards,new Random(seed));
+        
+        ////
         for(int i=0;i<52;i++){
             Cards a = (Cards)cards.get(i);
             System.out.print(a.cnumber);
             System.out.println(a.ctype);
         }
-        
+        ////
     }
     
  
@@ -75,6 +92,7 @@ public class PokerServer {
     public static void main(String[] args) {
         PokerServer p = new PokerServer();
         p.creatingCards();
+        p.randomizingCards();
     }
     
 }
