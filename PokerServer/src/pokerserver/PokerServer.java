@@ -11,7 +11,6 @@ package pokerserver;
  */
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
@@ -63,6 +62,7 @@ public class PokerServer {
             }
         }
         
+        //printing all the cards
         /*for(int i=0;i<52;i++){
             Cards a = (Cards)cards.get(i);
             System.out.print(a.cnumber);
@@ -76,6 +76,7 @@ public class PokerServer {
         long seed = System.nanoTime();
         Collections.shuffle(cards,new Random(seed));
         
+        //printing all the randomized cards
         ////
         for(int i=0;i<52;i++){
             Cards a = (Cards)cards.get(i);
