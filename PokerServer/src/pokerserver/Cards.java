@@ -10,6 +10,34 @@ package pokerserver;
  * @author supithaweerasinghe
  */
 public class Cards {
-    int cnumber;
-    String ctype;
+   private int cnumber;
+   private String ctype;
+
+    /**
+     * @return the cnumber
+     */
+    public int getCnumber() {
+        return cnumber;
+    }
+
+    /**
+     * @param cnumber the cnumber to set
+     */
+    public void setCnumber(int cnumber) {
+        this.cnumber = cnumber;
+    }
+
+    /**
+     * @return the ctype
+     */
+    public String getCtype() {
+        return ctype;
+    }
+
+    /**
+     * @param ctype the ctype to set
+     */
+    public void setCtype(String ctype) {
+        this.ctype = ctype;
+    }
 }
