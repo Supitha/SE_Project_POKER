@@ -69,18 +69,21 @@ public class CardLogic {
         
     }
     
-    void randomizingCards(){
+    ArrayList randomizingCards(){
         //randomizing arraylist - cards / shuffling
         long seed = System.nanoTime();
         Collections.shuffle(cards,new Random(seed));
         
         //printing all the randomized cards
         ////
+        /*
         for(int i=0;i<52;i++){
             Cards a = (Cards)cards.get(i);
             System.out.print(a.cnumber);
             System.out.println(a.ctype);
         }
+        */
         ////
+        return cards;
     }
 }

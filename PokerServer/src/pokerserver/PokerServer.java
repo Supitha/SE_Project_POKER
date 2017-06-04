@@ -5,6 +5,8 @@
  */
 package pokerserver;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author supithaweerasinghe
@@ -18,7 +20,41 @@ public class PokerServer {
     public static void main(String[] args) {
         CardLogic l = new CardLogic();
         l.creatingCards();
-        l.randomizingCards();
+        ArrayList cards = l.randomizingCards();
+        
+        /*for(int i=0;i<52;i++){
+            Cards a = (Cards)cards.get(i);
+            System.out.print(a.cnumber);
+            System.out.println(a.ctype);
+        }*/
+        
+        GameLogicCardDistribution g = new GameLogicCardDistribution();
+        
+        ArrayList initial = g.initialCardsDistribution(cards, 2);
+        
+        ArrayList cardset = g.cardsDistrubution();
+        
+        ///
+        System.out.println("initial card sets 2x2");
+        for(int i=0;i<initial.size();i++){
+            Cards a = (Cards)initial.get(i);
+            System.out.print(a.cnumber);
+            System.out.println(a.ctype);
+        }
+        ///
+        
+        ///
+        System.out.println("Card sets 3x3");
+        for(int i=0;i<cardset.size();i++){
+            Cards a = (Cards)cardset.get(i);
+            System.out.print(a.cnumber);
+            System.out.println(a.ctype);
+        }
+        ///
+        
+        ///
+        g.displaycard();
+        ///
     }
     
 }
