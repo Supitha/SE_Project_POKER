@@ -26,8 +26,8 @@ public class CardLogic {
                 String type = "spade";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
-                    a.cnumber = x;
-                    a.ctype = type;
+                    a.setCnumber(x);
+                    a.setCtype(type);
                     cards.add(a);
                 }
             //adding 14 cards belongs to clubs
@@ -35,8 +35,8 @@ public class CardLogic {
                 String type = "clubs";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
-                    a.cnumber = x;
-                    a.ctype = type;
+                    a.setCnumber(x);
+                    a.setCtype(type);
                     cards.add(a);
                 }
             //adding 14 cards belongs to diamonds
@@ -44,8 +44,8 @@ public class CardLogic {
                 String type = "diamonds";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
-                    a.cnumber = x;
-                    a.ctype = type;
+                    a.setCnumber(x);
+                    a.setCtype(type);
                     cards.add(a);
                 }
             //adding 14 cards belongs to hearts
@@ -53,18 +53,18 @@ public class CardLogic {
                 String type = "hearts";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
-                    a.cnumber = x;
-                    a.ctype = type;
+                    a.setCnumber(x);
+                    a.setCtype(type);
                     cards.add(a);
                 }
             }
         }
         
-        //printing all the cards
+//        printing all the cards
         /*for(int i=0;i<52;i++){
             Cards a = (Cards)cards.get(i);
-            System.out.print(a.cnumber);
-            System.out.println(a.ctype);
+            System.out.print(a.getCnumber());
+            System.out.println(a.getCtype());
         }*/
         
     }
@@ -76,11 +76,11 @@ public class CardLogic {
         
         //printing all the randomized cards
         ////
-        /*
-        for(int i=0;i<52;i++){
+        
+        /*for(int i=0;i<52;i++){
             Cards a = (Cards)cards.get(i);
-            System.out.print(a.cnumber);
-            System.out.println(a.ctype);
+            System.out.print(a.getCnumber());
+            System.out.println(a.getCtype());
         }
         */
         ////
