@@ -12,22 +12,43 @@ import java.util.ArrayList;
  * @author supithaweerasinghe
  */
 public class GameLogicCardDistribution {
-    ///
-    ///
+    
     ArrayList remaincards;
     int no_ofplayers;
     
+    //Giving pairs of initialcards to all players
     ArrayList initialCardsDistribution(ArrayList a,int players){
         ArrayList initial = new ArrayList();
+        //We have to give one pair of initial cards to each player, 
+        //therefore total number of initial cards = number_of_players * 2
         int no_ofinitialcrds = players*2;
+        //assigning all the shuffeled cards to remaincards-ArrayList
         remaincards = a;
+        //assigning number of palyers to no_ofplayers
         no_ofplayers = players;
             for(int x=0;x<no_ofinitialcrds;x++){
                Cards crd = (Cards)a.get(51-x);
+               //adding initial cards to initial-ArrayList
                initial.add(crd);
+               //removing given cards
                remaincards.remove(51-x);
             }
         return initial;
+    }
+    
+    //Giving 3 card for each player - Now total number of cards in a hand is complete
+    ArrayList cardsDistrubution(){
+        //same as above, 3 cards for each player
+        int no_ofnormalcrds = no_ofplayers*3;
+        ArrayList cardset = new ArrayList();
+        for(int i=0;i<no_ofnormalcrds;i++){
+            Cards crd = (Cards)remaincards.get((remaincards.size()-1)-i);
+            //adding cards to cardset-ArrayList
+            cardset.add(crd);
+            //removing given cards
+            remaincards.remove((remaincards.size()-1)-i);
+        }
+      return cardset;  
     }
     
     ///
@@ -40,17 +61,5 @@ public class GameLogicCardDistribution {
         }*/
     }
     ///
-    
-    ArrayList cardsDistrubution(){
-        //int no_ofhands = 
-        int no_ofinitialcrds = no_ofplayers*3;
-        ArrayList cardset = new ArrayList();
-        for(int i=0;i<no_ofinitialcrds;i++){
-            Cards crd = (Cards)remaincards.get((remaincards.size()-1)-i);
-            cardset.add(crd);
-            remaincards.remove((remaincards.size()-1)-i);
-        }
-      return cardset;  
-    }
     
 }

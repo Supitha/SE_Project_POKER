@@ -19,7 +19,9 @@ public class PokerServer {
      */
     public static void main(String[] args) {
         CardLogic l = new CardLogic();
+        //create 52 cards
         l.creatingCards();
+        //randomizing 52 cards
         ArrayList cards = l.randomizingCards();
         
         /*for(int i=0;i<52;i++){
@@ -29,9 +31,10 @@ public class PokerServer {
         }*/
         
         GameLogicCardDistribution g = new GameLogicCardDistribution();
-        
+        //Give - pair of initial cards to each player
+        //g.initialCardsDistribution(RANDOMIZED_ARRAYLIST, NUMBER_OF_PLAYERS);
         ArrayList initial = g.initialCardsDistribution(cards, 2);
-        
+        //Give - 3 cards to each player
         ArrayList cardset = g.cardsDistrubution();
         
         ///

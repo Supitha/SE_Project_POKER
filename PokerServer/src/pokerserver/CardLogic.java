@@ -60,7 +60,7 @@ public class CardLogic {
             }
         }
         
-//        printing all the cards
+        //printing all the cards
         /*for(int i=0;i<52;i++){
             Cards a = (Cards)cards.get(i);
             System.out.print(a.getCnumber());
@@ -75,15 +75,16 @@ public class CardLogic {
         Collections.shuffle(cards,new Random(seed));
         
         //printing all the randomized cards
-        ////
         
+        ///
         /*for(int i=0;i<52;i++){
             Cards a = (Cards)cards.get(i);
             System.out.print(a.getCnumber());
             System.out.println(a.getCtype());
         }
         */
-        ////
+        ///
+        
         return cards;
     }
 }
