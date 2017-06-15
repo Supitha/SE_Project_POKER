@@ -24,6 +24,9 @@ public class PokerServer {
         GameLogicCardDistribution g = new GameLogicCardDistribution();
         GameLogicHandsofCards h = new GameLogicHandsofCards();
         
+        ///////DEMO
+        DemoImplimentation demo = new DemoImplimentation();
+        
         //create 52 cards
         l.creatingCards();
         //randomizing 52 cards
@@ -64,29 +67,32 @@ public class PokerServer {
         ///
         
         ////////////////////////////////Hands///////////////////////////////
+        //Original
+        //h.handsofCards(no_of_players, initial, normal);
         
-        h.handsofCards(no_of_players, initial, normal);
+        //initilizing DEMO 
+        demo.printCardHands(no_of_players, initial, normal);
         
-        System.out.println("\n--------player 1's cards set--------");
-        System.out.println("\nPlayer 1's initial two cards");
-        for(int i=0;i<h.player1.size();i++){
-            Cards a = (Cards)h.player1.get(i);
-            System.out.print(a.getCnumber());
-            System.out.println(a.getCtype());
-            if(i==1){
-                System.out.println("Player 1's normal cards");
-            }
-        }
-        System.out.println("\n--------player 2's cards set--------");
-        System.out.println("\nPlayer 2's initial two cards");
-        for(int i=0;i<h.player2.size();i++){
-            Cards a = (Cards)h.player2.get(i);
-            System.out.print(a.getCnumber());
-            System.out.println(a.getCtype());
-            if(i==1){
-                System.out.println("Player 2's normal cards");
-            }
-        }
+//        System.out.println("\n--------player 1's cards set--------");
+//        System.out.println("\nPlayer 1's initial two cards");
+//        for(int i=0;i<h.player1.size();i++){
+//            Cards a = (Cards)h.player1.get(i);
+//            System.out.print(a.getCnumber());
+//            System.out.println(a.getCtype());
+//            if(i==1){
+//                System.out.println("Player 1's normal cards");
+//            }
+//        }
+//        System.out.println("\n--------player 2's cards set--------");
+//        System.out.println("\nPlayer 2's initial two cards");
+//        for(int i=0;i<h.player5.size();i++){
+//            Cards a = (Cards)h.player5.get(i);
+//            System.out.print(a.getCnumber());
+//            System.out.println(a.getCtype());
+//            if(i==1){
+//                System.out.println("Player 2's normal cards");
+//            }
+//        }
     }
     
 }

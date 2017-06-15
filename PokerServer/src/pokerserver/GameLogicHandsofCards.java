@@ -23,6 +23,14 @@ public class GameLogicHandsofCards {
     void handsofCards(int no_of_players, ArrayList initial,ArrayList normal){
         logic_initial(no_of_players, initial);
         logic_normal(no_of_players, normal);
+        
+        ////////
+//            for(int i=0;i<player6.size();i++){
+//                Cards a = (Cards)player6.get(i);
+//                System.out.print(a.getCnumber());
+//                System.out.println(a.getCtype());
+//            }
+        //////////
     }
     
     void logic_initial(int players,ArrayList initial){
