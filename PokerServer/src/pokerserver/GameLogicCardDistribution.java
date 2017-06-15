@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class GameLogicCardDistribution {
     
-    ArrayList remaincards;
+    public ArrayList remaincards;
     int no_ofplayers;
     
     //Giving pairs of initialcards to all players
