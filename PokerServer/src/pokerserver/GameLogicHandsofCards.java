@@ -23,7 +23,33 @@ public class GameLogicHandsofCards {
     void handsofCards(int no_of_players, ArrayList initial,ArrayList normal){
         logic_initial(no_of_players, initial);
         logic_normal(no_of_players, normal);
-        
+        ////////
+        ArrayList temp = new ArrayList();
+        for (int x = 0; x < no_of_players; x++) {
+            if(x==0){
+                temp = player1;
+            }else if (x==1){
+                temp = player2;
+            }else if (x==2){
+                temp = player3;
+            }else if (x==3){
+                temp = player4;
+            }else if (x==4){
+                temp = player5;
+            }else if (x==5){
+                temp = player6;
+            }else System.out.println("Invalid number of players");
+            System.out.println("\n--------player "+(x+1)+"'s cards set--------");
+            System.out.println("\nPlayer "+(x+1)+"'s initial two cards");
+            for (int i = 0; i < temp.size(); i++) {
+                Cards a = (Cards) temp.get(i);
+                System.out.print(a.getCnumber());
+                System.out.println(a.getCtype());
+                if (i == 1) {
+                    System.out.println("Player "+(x+1)+"'s normal cards");
+                }
+            }
+        }
         ////////
 //            for(int i=0;i<player6.size();i++){
 //                Cards a = (Cards)player6.get(i);
@@ -36,59 +62,56 @@ public class GameLogicHandsofCards {
     void logic_initial(int players,ArrayList initial){
         int no_of_cards = players*2;
         for(int i=0;i<no_of_cards;i++){
-            switch (players) {
-                case 2:
-                    if(i==0||i==1){
-                        player1.add(initial.get(i));
-                    }else if (i==2||i==3){
-                        player2.add(initial.get(i));
-                    }   break;
-                case 3:
-                    if(i==0||i==1){
-                        player1.add(initial.get(i));
-                    }else if (i==2||i==3){
-                        player2.add(initial.get(i));
-                    }else if (i==4||i==5){
-                        player3.add(initial.get(i));
-                    }   break;
-                case 4:
-                    if(i==0||i==1){
-                        player1.add(initial.get(i));
-                    }else if (i==2||i==3){
-                        player2.add(initial.get(i));
-                    }else if (i==4||i==5){
-                        player3.add(initial.get(i));
-                    }else if (i==6||i==7){
-                        player4.add(initial.get(i));
-                    }   break;
-                case 5:
-                    if(i==0||i==1){
-                        player1.add(initial.get(i));
-                    }else if (i==2||i==3){
-                        player2.add(initial.get(i));
-                    }else if (i==4||i==5){
-                        player3.add(initial.get(i));
-                    }else if (i==6||i==7){
-                        player4.add(initial.get(i));
-                    }else if (i==8||i==9){
-                        player5.add(initial.add(i));
-                    }   break;
-                case 6:
-                    if(i==0||i==1){
-                        player1.add(initial.get(i));
-                    }else if (i==2||i==3){
-                        player2.add(initial.get(i));
-                    }else if (i==4||i==5){
-                        player3.add(initial.get(i));
-                    }else if (i==6||i==7){
-                        player4.add(initial.get(i));
-                    }else if (i==8||i==9){
-                        player5.add(initial.add(i));
-                    }else if (i==10||i==11){
-                        player6.add(initial.add(i));
-                    }   break;
-                default:
-                    break;
+            if(players==2){
+                if(i==0||i==1){
+                    player1.add(initial.get(i));
+                }else if (i==2||i==3){
+                    player2.add(initial.get(i));
+                }
+            }else if (players==3){ 
+                if(i==0||i==1){
+                    player1.add(initial.get(i));
+                }else if (i==2||i==3){
+                    player2.add(initial.get(i));
+                }else if (i==4||i==5){
+                    player3.add(initial.get(i));
+                }
+            }else if (players==4){
+                if(i==0||i==1){
+                    player1.add(initial.get(i));
+                }else if (i==2||i==3){
+                    player2.add(initial.get(i));
+                }else if (i==4||i==5){
+                    player3.add(initial.get(i));
+                }else if (i==6||i==7){
+                    player4.add(initial.get(i));
+                }  
+            } else if (players==5){
+                if(i==0||i==1){
+                    player1.add(initial.get(i));
+                }else if (i==2||i==3){
+                    player2.add(initial.get(i));
+                }else if (i==4||i==5){
+                    player3.add(initial.get(i));
+                }else if (i==6||i==7){
+                    player4.add(initial.get(i));
+                }else if (i==8||i==9){
+                    player5.add(initial.add(i));
+                }   
+            } else if (players==6){
+                if(i==0||i==1){
+                    player1.add(initial.get(i));
+                }else if (i==2||i==3){
+                    player2.add(initial.get(i));
+                }else if (i==4||i==5){
+                    player3.add(initial.get(i));
+                }else if (i==6||i==7){
+                    player4.add(initial.get(i));
+                }else if (i==8||i==9){
+                    player5.add(initial.add(i));
+                }else if (i==10||i==11){
+                    player6.add(initial.add(i));
+                }
             }
         }
     }

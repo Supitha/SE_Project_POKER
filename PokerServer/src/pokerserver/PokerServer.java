@@ -19,13 +19,10 @@ public class PokerServer {
      */
     public static void main(String[] args) {
         
-        int no_of_players = 2;
+        int no_of_players = 4;
         CardLogic l = new CardLogic();
         GameLogicCardDistribution g = new GameLogicCardDistribution();
         GameLogicHandsofCards h = new GameLogicHandsofCards();
-        
-        ///////DEMO
-        DemoImplimentation demo = new DemoImplimentation();
         
         //create 52 cards
         l.creatingCards();
@@ -68,10 +65,10 @@ public class PokerServer {
         
         ////////////////////////////////Hands///////////////////////////////
         //Original
-        //h.handsofCards(no_of_players, initial, normal);
+        h.handsofCards(no_of_players, initial, normal);
         
         //initilizing DEMO 
-        demo.printCardHands(no_of_players, initial, normal);
+        //demo.printCardHands(no_of_players, initial, normal);
         
 //        System.out.println("\n--------player 1's cards set--------");
 //        System.out.println("\nPlayer 1's initial two cards");
