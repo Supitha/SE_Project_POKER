@@ -19,7 +19,7 @@ public class PokerServer {
      */
     public static void main(String[] args) {
         
-        int no_of_players = 6;
+        int no_of_players = 5;
         CardLogic l = new CardLogic();
         GameLogicCardDistribution g = new GameLogicCardDistribution();
         GameLogicHandsofCards h = new GameLogicHandsofCards();

@@ -5,10 +5,15 @@
  */
 package pokerserver;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author supithaweerasinghe
  */
 public class GameLogicCardsChange {
-    
+    ArrayList changeCards(ArrayList remain,ArrayList cards,int[]index,int a){
+           
+        return remain;
+    }
 }
