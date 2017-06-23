@@ -96,7 +96,7 @@ public class GameLogicHandsofCards {
                 }else if (i==6||i==7){
                     player4.add(initial.get(i));
                 }else if (i==8||i==9){
-                    player5.add(initial.add(i));
+                    player5.add(initial.get(i));
                 }   
             } else if (players==6){
                 if(i==0||i==1){
@@ -108,9 +108,9 @@ public class GameLogicHandsofCards {
                 }else if (i==6||i==7){
                     player4.add(initial.get(i));
                 }else if (i==8||i==9){
-                    player5.add(initial.add(i));
+                    player5.add(initial.get(i));
                 }else if (i==10||i==11){
-                    player6.add(initial.add(i));
+                    player6.add(initial.get(i));
                 }
             }
         }
@@ -154,7 +154,7 @@ public class GameLogicHandsofCards {
                     }else if (i==9||i==10||i==11){
                         player4.add(normal.get(i));
                     }else if (i==12||i==13||i==14){
-                        player5.add(normal.add(i));
+                        player5.add(normal.get(i));
                     }   break;
                 case 6:
                     if(i==0||i==1||i==2){
@@ -166,9 +166,9 @@ public class GameLogicHandsofCards {
                     }else if (i==9||i==10||i==11){
                         player4.add(normal.get(i));
                     }else if (i==12||i==13||i==14){
-                        player5.add(normal.add(i));
+                        player5.add(normal.get(i));
                     }else if (i==15||i==16||i==17){
-                        player6.add(normal.add(i));
+                        player6.add(normal.get(i));
                     }   break;
                 default:
                     break;

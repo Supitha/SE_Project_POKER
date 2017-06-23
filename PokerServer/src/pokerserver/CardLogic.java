@@ -23,7 +23,7 @@ public class CardLogic {
             //there are 4 types of cards spades,clubs,diamods,hearts
             //adding 14 cards belongs to spade
             if(i==0){
-                String type = "spade";
+                String type = "s";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
                     a.setCnumber(x);
@@ -32,7 +32,7 @@ public class CardLogic {
                 }
             //adding 14 cards belongs to clubs
             }else if(i==1){
-                String type = "clubs";
+                String type = "c";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
                     a.setCnumber(x);
@@ -41,7 +41,7 @@ public class CardLogic {
                 }
             //adding 14 cards belongs to diamonds
             }else if(i==2){
-                String type = "diamonds";
+                String type = "d";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
                     a.setCnumber(x);
@@ -50,7 +50,7 @@ public class CardLogic {
                 }
             //adding 14 cards belongs to hearts
             }else{
-                String type = "hearts";
+                String type = "h";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
                     a.setCnumber(x);
