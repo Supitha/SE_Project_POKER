@@ -26,8 +26,8 @@ public class CardLogic {
                 String type = "s";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
-                    a.setCnumber(x);
                     a.setCtype(type);
+                    a.setCnumber(x);
                     cards.add(a);
                 }
             //adding 14 cards belongs to clubs
@@ -35,8 +35,8 @@ public class CardLogic {
                 String type = "c";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
-                    a.setCnumber(x);
                     a.setCtype(type);
+                    a.setCnumber(x);
                     cards.add(a);
                 }
             //adding 14 cards belongs to diamonds
@@ -44,8 +44,8 @@ public class CardLogic {
                 String type = "d";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
-                    a.setCnumber(x);
                     a.setCtype(type);
+                    a.setCnumber(x);
                     cards.add(a);
                 }
             //adding 14 cards belongs to hearts
@@ -53,8 +53,8 @@ public class CardLogic {
                 String type = "h";
                 for(int x=2;x<=14;x++){
                     Cards a = new Cards();
-                    a.setCnumber(x);
                     a.setCtype(type);
+                    a.setCnumber(x);
                     cards.add(a);
                 }
             }

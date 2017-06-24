@@ -10,8 +10,8 @@ package pokerserver;
  * @author supithaweerasinghe
  */
 public class Cards {
-   private int cnumber;
    private String ctype;
+   private int cnumber;
 
     /**
      * @return the cnumber
