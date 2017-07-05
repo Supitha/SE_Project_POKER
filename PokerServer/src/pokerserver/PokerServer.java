@@ -29,6 +29,9 @@ public class PokerServer {
     public static ArrayList player4 = new ArrayList();
     public static ArrayList player5 = new ArrayList();
     public static ArrayList player6 = new ArrayList();
+    
+    public static ArrayList remainCards = new ArrayList();
+    public static ArrayList initial = new ArrayList();
 
     /**
      * @param args the command line arguments
@@ -84,6 +87,7 @@ public class PokerServer {
                 ArrayList testobj = new ArrayList();
                 ArrayList teststr = new ArrayList();
                 String arrayListString;
+                String initialCards;
 
 //                testobj = demo.hand(clientNumber);
 //                teststr = objectsToString(testobj);
@@ -122,7 +126,7 @@ public class PokerServer {
                 System.out.println(number_of_Players + " - " + client_name);
 
                 if (number_of_Players == total_number) {
-                    p.println(stringClear(client_name));
+                   p.println(stringClear(client_name));
                 }
 
                 ////logic calling////
@@ -144,11 +148,35 @@ public class PokerServer {
 
                 teststr = objectsToString(testobj);
                 arrayListString = stringClear(teststr.toString());
-
+                initialCards = stringClear(objectsToString(initial).toString());
+                String handWithInitial = concatanation(arrayListString, initialCards);
+                
                 //send card hand to client
                 ///PrintStream p = new PrintStream(socket.getOutputStream());
-                p.println(arrayListString);
+                p.println(handWithInitial);
 
+                //get how many cards need to be changed?
+                String how_many = s.next();
+                ArrayList changedCards = new ArrayList();
+                changedCards = cardChange(Integer.parseInt(how_many));
+                String chngdCrds = stringClear(objectsToString(changedCards).toString());
+                
+                //send changed cards
+                p.println(chngdCrds);
+                
+                ////////////////
+                //System.out.println(remainCards.size());
+                ////////////////
+                
+                ////////////////
+//                System.out.println("Remain cards");
+//                for (int i = 0; i < remainCards.size(); i++) {
+//                    Cards a = (Cards) remainCards.get(i);
+//                    System.out.print(a.getCtype());
+//                    System.out.println(a.getCnumber());
+//                }
+                ////////////////
+                
                 //get values data from client
                 //Scanner s = new Scanner(sims.getInputStream());
             } catch (IOException e) {
@@ -182,9 +210,12 @@ public class PokerServer {
         }*/
             //Give - pair of initial cards to each player
             //g.initialCardsDistribution(RANDOMIZED_ARRAYLIST, NUMBER_OF_PLAYERS);
-            ArrayList initial = g.initialCardsDistribution(cards, number_of_Players);//here
+            initial = g.initialCardsDistribution(cards, number_of_Players);//here
             //Give - 3 cards to each player
             ArrayList normal = g.cardsDistrubution();
+            
+            //set remain cards to this instance
+            remainCards = g.remaincards;
 
             ///
             System.out.println("initial card sets 2x2");
@@ -221,6 +252,25 @@ public class PokerServer {
             System.out.println(message);
         }
 
+        ArrayList cardChange(int x){
+            ArrayList chngCrds = new ArrayList();
+            for(int y=0;y<x;y++){
+                Cards tmp = (Cards) remainCards.get(y);
+                chngCrds.add(tmp);
+            }
+            if(x==1){
+                remainCards.remove(0);
+            }else if(x==2){
+                remainCards.remove(0);
+                remainCards.remove(0);
+            }else if(x==3){
+                remainCards.remove(0);
+                remainCards.remove(0);
+                remainCards.remove(0);
+            }
+           return  chngCrds;
+        }
+        
         ArrayList objectsToString(ArrayList obj) {
             ArrayList converted = new ArrayList();
             String temp_type;
@@ -236,6 +286,12 @@ public class PokerServer {
             return converted;
         }
 
+        String concatanation(String a, String c){
+            String b = ",";
+            String fin = a.concat(b).concat(c);
+            return fin;
+        }
+        
         ArrayList stringToObjects(ArrayList strng) {
             ArrayList converted = new ArrayList();
             String temp_type;

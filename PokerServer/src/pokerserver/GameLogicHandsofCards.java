@@ -24,32 +24,32 @@ public class GameLogicHandsofCards {
         logic_initial(no_of_players, initial);
         logic_normal(no_of_players, normal);
         ////////
-        ArrayList temp = new ArrayList();
-        for (int x = 0; x < no_of_players; x++) {
-            if(x==0){
-                temp = player1;
-            }else if (x==1){
-                temp = player2;
-            }else if (x==2){
-                temp = player3;
-            }else if (x==3){
-                temp = player4;
-            }else if (x==4){
-                temp = player5;
-            }else if (x==5){
-                temp = player6;
-            }else System.out.println("Invalid number of players");
-            System.out.println("\n--------player "+(x+1)+"'s cards set--------");
-            System.out.println("\nPlayer "+(x+1)+"'s initial two cards");
-            for (int i = 0; i < temp.size(); i++) {
-                Cards a = (Cards) temp.get(i);
-                System.out.print(a.getCnumber());
-                System.out.println(a.getCtype());
-                if (i == 1) {
-                    System.out.println("Player "+(x+1)+"'s normal cards");
-                }
-            }
-        }
+//        ArrayList temp = new ArrayList();
+//        for (int x = 0; x < no_of_players; x++) {
+//            if(x==0){
+//                temp = player1;
+//            }else if (x==1){
+//                temp = player2;
+//            }else if (x==2){
+//                temp = player3;
+//            }else if (x==3){
+//                temp = player4;
+//            }else if (x==4){
+//                temp = player5;
+//            }else if (x==5){
+//                temp = player6;
+//            }else System.out.println("Invalid number of players");
+//            System.out.println("\n--------player "+(x+1)+"'s cards set--------");
+//            System.out.println("\nPlayer "+(x+1)+"'s initial two cards");
+//            for (int i = 0; i < temp.size(); i++) {
+//                Cards a = (Cards) temp.get(i);
+//                System.out.print(a.getCnumber());
+//                System.out.println(a.getCtype());
+//                if (i == 1) {
+//                    System.out.println("Player "+(x+1)+"'s normal cards");
+//                }
+//            }
+//        }
         ////////
 //            for(int i=0;i<player6.size();i++){
 //                Cards a = (Cards)player6.get(i);

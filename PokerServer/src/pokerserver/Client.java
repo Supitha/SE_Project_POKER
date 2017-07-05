@@ -61,6 +61,7 @@ public class Client {
         Socket socket = client.connectToServer();
 
         String arrayListString;
+        String changedCards;
         
         
         //receving
@@ -95,10 +96,55 @@ public class Client {
         arrayListString = s2.next();
 
         List<String> myList = new ArrayList<String>(Arrays.asList(arrayListString.split(",")));
+        List<String> hand = new ArrayList();
+        List<String> initial = new ArrayList();
+        hand = myList.subList(0, 5);
+        initial = myList.subList(5, myList.size());
 
-        for (int i = 0; i < myList.size(); i++) {
-            String crd = myList.get(i);
+        System.out.println("Your Hand");
+        
+        for (int i = 0; i < hand.size(); i++) {
+            String crd = hand.get(i);
             System.out.println(crd);
+        }
+        
+//        System.out.println("Initial cads");
+//        
+//        for (int i = 0; i < initial.size(); i++) {
+//            String crd = initial.get(i);
+//            System.out.println(crd);
+//        }
+        
+        System.out.println("Others initial cards");
+        
+        List<String> demo = client.initialCards(hand, initial);
+        for (int i = 0; i < demo.size(); i++) {
+            String crd = demo.get(i);
+            System.out.println(crd);
+        }
+        
+        //Which cards need to be changed
+        Scanner s = new Scanner(System.in);
+        
+        System.out.println("Mow many cards need to be changed :");
+        int temp = s.nextInt();
+        
+        //send how many cards need to be changed?
+        p.println(Integer.toString(temp));
+        
+        //Get changed cards
+        changedCards = s2.next();
+        List<String> chndCrd = new ArrayList<String>(Arrays.asList(changedCards.split(",")));
+        
+        for (int i = 0; i < chndCrd.size(); i++) {
+            String crd = chndCrd.get(i);
+            System.out.println(crd);
+        }
+        
+        System.out.println("Enter cards need to be changed :");
+        List<Integer> chng = null;
+        for(int i=0;i<temp;i++){
+            chng.add(s.nextInt());
         }
         
         //sending number to server
@@ -107,6 +153,27 @@ public class Client {
 
         //int tmp = s2.nextInt();
         //System.out.println(tmp);
+    }
+    
+    ArrayList initialCards(List<String> hand,List<String> initial){
+        ArrayList fin = new ArrayList();
+      
+        for(int x=0;x<hand.size();x++){
+            for(int y=0;y<initial.size();y++){
+                if(hand.get(x).equals(initial.get(y))){
+                    initial.set(y,"null");
+                }
+            }
+        }
+        
+        for(int z=0;z<initial.size();z++){
+            if("null".equals(initial.get(z))){
+                z++;
+            }else {
+                fin.add(initial.get(z));
+            }
+        }
+        return fin;
     }
 
 }

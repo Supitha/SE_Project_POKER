@@ -17,7 +17,7 @@ public class CardLogic {
     //creating an array list
     ArrayList cards = new ArrayList();
     
-    void creatingCards(){
+     void creatingCards(){
         
         for(int i=0;i<4;i++){
             //there are 4 types of cards spades,clubs,diamods,hearts
