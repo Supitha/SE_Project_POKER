@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class RefereeCardCombinations {
 
     boolean royalFlush(ArrayList hand) {
-        boolean bool = false;
+        int tmpint = 0;
         ArrayList spade = new ArrayList();
         for (int x = 10; x <= 14; x++) {
             String tmp = Integer.toString(x);
@@ -35,23 +35,20 @@ public class RefereeCardCombinations {
             String tmp = Integer.toString(x);
             hearts.add("h" + tmp);
         }
-
         for (int crdtyp = 0; crdtyp < 4; crdtyp++) {
-
+            tmpint = 0;
             if (crdtyp == 0) {
                 for (int s = 0; s < hand.size(); s++) {
                     String spd = (String) spade.get(s);
                     for (int i = 0; i < hand.size(); i++) {
                         String hnd = (String) hand.get(i);
                         if (spd.equals(hnd)) {
-                            bool = true;
-                        } else {
-                            bool = false;
+                            tmpint++;
                         }
                     }
                 }
-                if (bool == true) {
-                    return bool;
+                if (tmpint == 5) {
+                    return true;
                 }
             } else if (crdtyp == 1) {
                 for (int s = 0; s < hand.size(); s++) {
@@ -59,14 +56,12 @@ public class RefereeCardCombinations {
                     for (int i = 0; i < hand.size(); i++) {
                         String hnd = (String) hand.get(i);
                         if (spd.equals(hnd)) {
-                            bool = true;
-                        } else {
-                            bool = false;
+                            tmpint++;
                         }
                     }
                 }
-                if (bool == true) {
-                    return bool;
+                if(tmpint==5){
+                    return true;
                 }
             } else if (crdtyp == 2) {
                 for (int s = 0; s < hand.size(); s++) {
@@ -74,14 +69,12 @@ public class RefereeCardCombinations {
                     for (int i = 0; i < hand.size(); i++) {
                         String hnd = (String) hand.get(i);
                         if (spd.equals(hnd)) {
-                            bool = true;
-                        } else {
-                            bool = false;
+                            tmpint++;
                         }
                     }
                 }
-                if (bool == true) {
-                    return bool;
+                if(tmpint==5){
+                    return true;
                 }
             } else {
                 for (int s = 0; s < hand.size(); s++) {
@@ -89,24 +82,22 @@ public class RefereeCardCombinations {
                     for (int i = 0; i < hand.size(); i++) {
                         String hnd = (String) hand.get(i);
                         if (spd.equals(hnd)) {
-                            bool = true;
-                        } else {
-                            bool = false;
-                        }
+                            tmpint++;
+                        } 
                     }
                 }
-                if (bool == true) {
-                    return bool;
+                if(tmpint==5){
+                    return true;
                 }
             }
 
         }
 
-        return bool;
+        return false;
     }
 
     boolean straightFlush(ArrayList hand) {
-        boolean bool = false;
+        int tmpint = 0;
         ArrayList spade = new ArrayList();
         for (int x = 6; x <= 10; x++) {
             String tmp = Integer.toString(x);
@@ -129,21 +120,19 @@ public class RefereeCardCombinations {
         }
 
         for (int crdtyp = 0; crdtyp < 4; crdtyp++) {
-
+            tmpint = 0;
             if (crdtyp == 0) {
                 for (int s = 0; s < hand.size(); s++) {
                     String spd = (String) spade.get(s);
                     for (int i = 0; i < hand.size(); i++) {
                         String hnd = (String) hand.get(i);
                         if (spd.equals(hnd)) {
-                            bool = true;
-                        } else {
-                            bool = false;
+                            tmpint++;
                         }
                     }
                 }
-                if (bool == true) {
-                    return bool;
+                if(tmpint==5){
+                    return true;
                 }
             } else if (crdtyp == 1) {
                 for (int s = 0; s < hand.size(); s++) {
@@ -151,14 +140,12 @@ public class RefereeCardCombinations {
                     for (int i = 0; i < hand.size(); i++) {
                         String hnd = (String) hand.get(i);
                         if (spd.equals(hnd)) {
-                            bool = true;
-                        } else {
-                            bool = false;
+                            tmpint++;
                         }
                     }
                 }
-                if (bool == true) {
-                    return bool;
+                if(tmpint==5){
+                    return true;
                 }
             } else if (crdtyp == 2) {
                 for (int s = 0; s < hand.size(); s++) {
@@ -166,14 +153,12 @@ public class RefereeCardCombinations {
                     for (int i = 0; i < hand.size(); i++) {
                         String hnd = (String) hand.get(i);
                         if (spd.equals(hnd)) {
-                            bool = true;
-                        } else {
-                            bool = false;
+                            tmpint++;
                         }
                     }
                 }
-                if (bool == true) {
-                    return bool;
+                if(tmpint==5){
+                    return true;
                 }
             } else {
                 for (int s = 0; s < hand.size(); s++) {
@@ -181,20 +166,18 @@ public class RefereeCardCombinations {
                     for (int i = 0; i < hand.size(); i++) {
                         String hnd = (String) hand.get(i);
                         if (spd.equals(hnd)) {
-                            bool = true;
-                        } else {
-                            bool = false;
-                        }
+                            tmpint++;
+                        } 
                     }
                 }
-                if (bool == true) {
-                    return bool;
+                if(tmpint==5){
+                    return true;
                 }
             }
 
         }
 
-        return bool;
+        return false;
     }
 
     boolean fourOfaKind(ArrayList hand) {
@@ -225,6 +208,8 @@ public class RefereeCardCombinations {
         return bool;
     }
 
+    
+    /////remake->
     boolean fullHouse(ArrayList hand) {
         boolean bool = false;
         int s = 0, d = 0, h = 0, c = 0;
@@ -403,19 +388,93 @@ public class RefereeCardCombinations {
         return bool;
     }
 
-    public static void main(String[] args) {
-        ArrayList diamonds = new ArrayList();
-//        for (int x = 6; x <= 10; x++) {
-//            String tmp = Integer.toString(x);
-//            diamonds.add("d" + tmp);
-//        }
-        diamonds.add("d2");
-        diamonds.add("d3");
-        diamonds.add("c5");
-        diamonds.add("h7");
-        diamonds.add("h4");
-        RefereeCardCombinations r = new RefereeCardCombinations();
-        boolean isRoyal = r.fullHouse(diamonds);
-        System.out.println(isRoyal);
+    int highCard(ArrayList hand) {
+        int[] temp = new int[hand.size()];
+        for (int i = 0; i < hand.size(); i++) {
+            String tmp1 = (String) hand.get(i);
+            String tmp2 = tmp1.substring(1);
+            temp[i] = Integer.parseInt(tmp2);
+        }
+
+        for (int j = 0; j < temp.length; j++) {
+            for (int k = 0; k < temp.length; k++) {
+                if (temp[j] > temp[k]) {
+                    int tmp3 = temp[j];
+                    temp[j] = temp[k];
+                    temp[k] = tmp3;
+                }
+            }
+        }
+        return temp[0];
     }
+
+    /////////////////////
+    
+    public static void main(String[] args) {
+        RefereeCardCombinations ref = new RefereeCardCombinations();
+        ArrayList demo = new ArrayList();
+        demo.add("h10");
+        demo.add("c10");
+        demo.add("d10");
+        demo.add("s6");
+        demo.add("c8");
+        int marks = ref.giveMarks(demo);
+        System.out.println("Your marks : "+marks);
+    }
+    
+    /////////////////////
+
+    int giveMarks(ArrayList hand) {
+        RefereeCardCombinations ref = new RefereeCardCombinations();
+        int mark = 0;
+        boolean refeval = false;
+        refeval = ref.royalFlush(hand);
+        if (refeval == false) {
+            refeval = ref.straightFlush(hand);
+            if (refeval == false) {
+                refeval = ref.fourOfaKind(hand);
+                if (refeval == false) {
+                    refeval = ref.fullHouse(hand);
+                    if (refeval == false) {
+                        refeval = ref.flush(hand);
+                        if (refeval == false) {
+                            refeval = ref.straight(hand);
+                            if (refeval == false) {
+                                refeval = ref.threeOfaKind(hand);
+                                if (refeval == false) {
+                                    refeval = ref.twoPairs(hand);
+                                    if (refeval == false) {
+                                        refeval = ref.onePair(hand);
+                                        if (refeval == false) {
+                                            mark = mark + ref.highCard(hand);
+                                        } else if (refeval == true) {
+                                            mark = 20;
+                                        }
+                                    } else if (refeval == true) {
+                                        mark = 25;
+                                    }
+                                } else if (refeval == true) {
+                                    mark = 30;
+                                }
+                            } else if (refeval == true) {
+                                mark = 35;
+                            }
+                        } else if (refeval == true) {
+                            mark = 40;
+                        }
+                    } else if (refeval == true) {
+                        mark = 45;
+                    }
+                } else if (refeval == true) {
+                    mark = 50;
+                }
+            } else if (refeval == true) {
+                mark = 55;
+            }
+        } else if (refeval == true) {
+            mark = 60;
+        }
+        return mark;
+    }
+
 }

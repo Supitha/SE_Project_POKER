@@ -11,6 +11,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +23,7 @@ public class PokerServer {
 
     public static int number_of_Players = 0;
     public static int total_number = 0;
+    public static int marks = 0;
     public static ArrayList player_name = new ArrayList();
     public static ServerSocket listener;
 
@@ -29,9 +33,12 @@ public class PokerServer {
     public static ArrayList player4 = new ArrayList();
     public static ArrayList player5 = new ArrayList();
     public static ArrayList player6 = new ArrayList();
-    
+
     public static ArrayList remainCards = new ArrayList();
     public static ArrayList initial = new ArrayList();
+    public static ArrayList index = new ArrayList();
+    
+    public static String combination = "";
 
     /**
      * @param args the command line arguments
@@ -94,6 +101,7 @@ public class PokerServer {
 //                arrayListString = stringClear(teststr.toString());
                 PrintStream p = new PrintStream(socket.getOutputStream());
                 Scanner s = new Scanner(socket.getInputStream());
+                RefereePointsHandler refpt = new RefereePointsHandler();
 
 //               System.out.println(arrayListString);
                 if (clientNumber == 0) {
@@ -110,6 +118,8 @@ public class PokerServer {
                     player4 = handClass.player4;
                     player5 = handClass.player5;
                     player6 = handClass.player6;
+                    //clear table
+                    refpt.clearTable();
                 } else {
                     //send result to client
                     ///PrintStream p = new PrintStream(socket.getOutputStream());
@@ -126,7 +136,7 @@ public class PokerServer {
                 System.out.println(number_of_Players + " - " + client_name);
 
                 if (number_of_Players == total_number) {
-                   p.println(stringClear(client_name));
+                    p.println(stringClear(client_name));
                 }
 
                 ////logic calling////
@@ -150,24 +160,80 @@ public class PokerServer {
                 arrayListString = stringClear(teststr.toString());
                 initialCards = stringClear(objectsToString(initial).toString());
                 String handWithInitial = concatanation(arrayListString, initialCards);
-                
+
                 //send card hand to client
                 ///PrintStream p = new PrintStream(socket.getOutputStream());
                 p.println(handWithInitial);
 
-                //get how many cards need to be changed?
-                String how_many = s.next();
-                ArrayList changedCards = new ArrayList();
-                changedCards = cardChange(Integer.parseInt(how_many));
-                String chngdCrds = stringClear(objectsToString(changedCards).toString());
+                try {
+                        TimeUnit.SECONDS.sleep(10);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(PokerServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
-                //send changed cards
-                p.println(chngdCrds);
+                //get card's indexes need to be changed?
+                String tempindex = s.next();
+                int val;
+                ArrayList stringNewHand = new ArrayList();
+
+                if (!"non".equals(tempindex)) {
+                    val = 1;
+                    index = stringtoArrayList(tempindex);
+                    int how_many = index.size();
+
+                    ArrayList changedCards = new ArrayList();
+                    //new cards
+                    changedCards = cardChange(how_many);
+                    ArrayList newcards = objectsToString(changedCards);
+                    String chngdCrds = stringClear(newcards.toString());
+
+                    //player's final hand
+                    ArrayList original = testobj;
+                    ArrayList sringoriginal = objectsToString(original);
+                    stringNewHand = creatingNewHand(index, sringoriginal, newcards);
+
+                    //send changed cards
+                    p.println(chngdCrds);
+                } else {
+                    stringNewHand = teststr;
+                    val = 0;
+                }
                 
+                //////////////////////////ffffffffffff/////////////////////////////
+                //calculating points
+                marks = giveMarks(stringNewHand, val);
+
+                //send data to DB
+                PointsDetails pd = new PointsDetails();
+                pd.setId(clientNumber);
+                pd.setName(client_name);
+                pd.setPoints(marks);
+                pd.setCombination(combination);
+                refpt.addPoints(pd);
+
+                //in case of a need - object array of final cards |V|
+                //ArrayList objNewHand = stringToObjects(stringNewHand);     
+                
+                try {
+                    if(clientNumber==0){
+                        TimeUnit.SECONDS.sleep(14);
+                    }else{
+                        TimeUnit.SECONDS.sleep(7);
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(PokerServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                //Slect winner
+                String winner = refpt.getHighestPoints();
+                System.out.println("WINNER IS : " + winner);
+
+                //send winner
+                p.println(winner);
                 ////////////////
                 //System.out.println(remainCards.size());
                 ////////////////
-                
+
                 ////////////////
 //                System.out.println("Remain cards");
 //                for (int i = 0; i < remainCards.size(); i++) {
@@ -176,7 +242,6 @@ public class PokerServer {
 //                    System.out.println(a.getCnumber());
 //                }
                 ////////////////
-                
                 //get values data from client
                 //Scanner s = new Scanner(sims.getInputStream());
             } catch (IOException e) {
@@ -213,7 +278,7 @@ public class PokerServer {
             initial = g.initialCardsDistribution(cards, number_of_Players);//here
             //Give - 3 cards to each player
             ArrayList normal = g.cardsDistrubution();
-            
+
             //set remain cards to this instance
             remainCards = g.remaincards;
 
@@ -252,25 +317,190 @@ public class PokerServer {
             System.out.println(message);
         }
 
-        ArrayList cardChange(int x){
+        int giveMarks(ArrayList hand, int eorn) {
+            int mark = 0;
+            if (eorn == 0) {
+                RefereeCardCombinations ref = new RefereeCardCombinations();
+                 boolean refeval = false;
+                refeval = ref.royalFlush(hand);
+                if (refeval == false) {
+                    refeval = ref.straightFlush(hand);
+                    if (refeval == false) {
+                        refeval = ref.fourOfaKind(hand);
+                        if (refeval == false) {
+                            refeval = ref.fullHouse(hand);
+                            if (refeval == false) {
+                                refeval = ref.flush(hand);
+                                if (refeval == false) {
+                                    refeval = ref.straight(hand);
+                                    if (refeval == false) {
+                                        refeval = ref.threeOfaKind(hand);
+                                        if (refeval == false) {
+                                            refeval = ref.twoPairs(hand);
+                                            if (refeval == false) {
+                                                refeval = ref.onePair(hand);
+                                                if (refeval == false) {
+                                                    mark = mark + ref.highCard(hand);
+                                                combination = "HighCard";
+                                                } else if (refeval == true) {
+                                                    combination = "OnePair";
+                                                    mark = 20;
+                                                }
+                                            } else if (refeval == true) {
+                                                combination = "TwoPairs";
+                                                mark = 25;
+                                            }
+                                        } else if (refeval == true) {
+                                            combination = "TreeOfaKind";
+                                            mark = 30;
+                                        }
+                                    } else if (refeval == true) {
+                                        combination = "Straight";
+                                        mark = 35;
+                                    }
+                                } else if (refeval == true) {
+                                    combination = "Flush";
+                                    mark = 40;
+                                }
+                            } else if (refeval == true) {
+                                combination = "FullHouse";
+                                mark = 45;
+                            }
+                        } else if (refeval == true) {
+                            combination = "FourOfaKind";
+                            mark = 50;
+                        }
+                    } else if (refeval == true) {
+                        combination = "StraightFlush";
+                        mark = 55;
+                    }
+                } else if (refeval == true) {
+                    combination = "RoyalFlush";
+                    mark = 60;
+                }
+                return mark;
+            } else {
+                RefereeCardCombinations ref = new RefereeCardCombinations();
+                boolean initialChanged = false;
+                boolean refeval = false;
+                for (int i = 0; i < index.size(); i++) {
+                    int temp1 = (int) index.get(i);
+                    if (temp1 == 1 || temp1 == 2) {
+                        initialChanged = true;
+                    }
+                }
+                refeval = ref.royalFlush(hand);
+                if (refeval == false) {
+                    refeval = ref.straightFlush(hand);
+                    if (refeval == false) {
+                        refeval = ref.fourOfaKind(hand);
+                        if (refeval == false) {
+                            refeval = ref.fullHouse(hand);
+                            if (refeval == false) {
+                                refeval = ref.flush(hand);
+                                if (refeval == false) {
+                                    refeval = ref.straight(hand);
+                                    if (refeval == false) {
+                                        refeval = ref.threeOfaKind(hand);
+                                        if (refeval == false) {
+                                            refeval = ref.twoPairs(hand);
+                                            if (refeval == false) {
+                                                refeval = ref.onePair(hand);
+                                                if (refeval == false) {
+                                                    mark = mark + ref.highCard(hand);
+                                                    combination = "HighCard";
+                                                } else if (refeval == true) {
+                                                    combination = "OnePair";
+                                                    mark = 20;
+                                                }
+                                            } else if (refeval == true) {
+                                                combination = "TwoPairs";
+                                                mark = 25;
+                                            }
+                                        } else if (refeval == true) {
+                                            combination = "TreeOfaKind";
+                                            mark = 30;
+                                        }
+                                    } else if (refeval == true) {
+                                        combination = "Straight";
+                                        mark = 35;
+                                    }
+                                } else if (refeval == true) {
+                                    combination = "Flush";
+                                    mark = 40;
+                                }
+                            } else if (refeval == true) {
+                                combination = "FullHouse";
+                                mark = 45;
+                            }
+                        } else if (refeval == true) {
+                            combination = "FourOfaKind";
+                            mark = 50;
+                        }
+                    } else if (refeval == true) {
+                        combination = "StraightFlush";
+                        mark = 55;
+                    }
+                } else if (refeval == true) {
+                    combination = "RoyalFlush";
+                    mark = 60;
+                }
+                if (initialChanged == true) {
+                    mark = mark - 6;
+                }
+                return mark;
+            }
+        }
+
+        ArrayList creatingNewHand(ArrayList indexes, ArrayList hand, ArrayList replacement) {
+            for (int i = 0; i < indexes.size(); i++) {
+                int indx = (int) indexes.get(i);
+                for (int j = 0; j < hand.size(); j++) {
+                    if (j == indx) {
+                        String tmp = (String) replacement.get(0);
+                        replacement.remove(0);
+                        hand.set(j, tmp);
+                    }
+                }
+            }
+            return hand;
+        }
+
+        ArrayList cardChange(int x) {
             ArrayList chngCrds = new ArrayList();
-            for(int y=0;y<x;y++){
+            for (int y = 0; y < x; y++) {
                 Cards tmp = (Cards) remainCards.get(y);
                 chngCrds.add(tmp);
             }
-            if(x==1){
+            if (x == 1) {
                 remainCards.remove(0);
-            }else if(x==2){
+            } else if (x == 2) {
                 remainCards.remove(0);
                 remainCards.remove(0);
-            }else if(x==3){
+            } else if (x == 3) {
                 remainCards.remove(0);
                 remainCards.remove(0);
                 remainCards.remove(0);
             }
-           return  chngCrds;
+            return chngCrds;
         }
-        
+
+        ArrayList stringtoArrayList(String cards) {
+            ArrayList temp = new ArrayList();
+            for (int i = 0; i < cards.length(); i++) {
+                if (i == cards.length() - 1) {
+                    String tmp2 = cards.substring(i);
+                    temp.add(Integer.parseInt(tmp2));
+                } else {
+                    String tmp1 = cards.substring(i, i + 1);
+                    if (!",".equals(tmp1)) {
+                        temp.add(Integer.parseInt(tmp1));
+                    }
+                }
+            }
+            return temp;
+        }
+
         ArrayList objectsToString(ArrayList obj) {
             ArrayList converted = new ArrayList();
             String temp_type;
@@ -286,12 +516,12 @@ public class PokerServer {
             return converted;
         }
 
-        String concatanation(String a, String c){
+        String concatanation(String a, String c) {
             String b = ",";
             String fin = a.concat(b).concat(c);
             return fin;
         }
-        
+
         ArrayList stringToObjects(ArrayList strng) {
             ArrayList converted = new ArrayList();
             String temp_type;
