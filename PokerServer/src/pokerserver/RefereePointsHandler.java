@@ -18,9 +18,9 @@ public class RefereePointsHandler {
 
     public int logmode;
     public String mod;
-    String url = "jdbc:mysql://localhost:3306/foker";
-    String username = "root";
-    String password = "";
+    String url = "jdbc:mysql://54.90.156.7:3306/foker";
+    String username = "remoteu";
+    String password = "password";
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;

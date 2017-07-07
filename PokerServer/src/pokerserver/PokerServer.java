@@ -58,8 +58,8 @@ public class PokerServer {
                     //send result to client
                     PrintStream p = new PrintStream(game.getOutputStream());
                     p.println("PLEASE_WAIT");
-                    listener.close();
-                    game.close();
+                    //listener.close();
+                    //game.close();
                 }
             }
         } catch (IOException e) {
