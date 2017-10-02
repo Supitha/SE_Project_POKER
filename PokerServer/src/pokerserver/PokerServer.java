@@ -164,12 +164,6 @@ public class PokerServer {
                 //send card hand to client
                 ///PrintStream p = new PrintStream(socket.getOutputStream());
                 p.println(handWithInitial);
-
-                try {
-                        TimeUnit.SECONDS.sleep(10);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(PokerServer.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 
                 //get card's indexes need to be changed?
                 String tempindex = s.next();

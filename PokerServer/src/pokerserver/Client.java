@@ -123,14 +123,14 @@ public class Client {
         Scanner s = new Scanner(System.in);
 
         ////////////////////////////////////////////////////////////////////////
-        System.out.println("Mow many cards need to be changed :");
+        System.out.println("How many cards need to be changed (If you do not need to change enter - 0) :");
         int temp = s.nextInt();
 
         if (temp == 0) {
             cardsTobeChanged = "non";
             p.println(cardsTobeChanged);
         } else {
-            System.out.println("Enter cards need to be changed :");
+            System.out.println("Enter card indexes need to be changed starting with 1:");
             ArrayList chng = new ArrayList();
             for (int i = 0; i < temp; i++) {
                 chng.add(s.nextInt() - 1);
@@ -148,12 +148,18 @@ public class Client {
             changedCards = s2.next();
             List<String> chndCrd = new ArrayList<String>(Arrays.asList(changedCards.split(",")));
 
+            System.out.println("Your changed cards :");
+            
             for (int i = 0; i < chndCrd.size(); i++) {
                 String crd = chndCrd.get(i);
                 System.out.println(crd);
             }
         }
-
+        
+        System.out.println("Please wait...!");
+        
+        System.out.print("Winner is : ");
+        
         //Get winner
         String winner = s2.next();
         System.out.println(winner);
