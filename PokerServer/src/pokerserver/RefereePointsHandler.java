@@ -18,7 +18,7 @@ public class RefereePointsHandler {
 
     public int logmode;
     public String mod;
-    String url = "jdbc:mysql://localhost:3306/foker";
+    String url = "jdbc:mysql://localhost:3306/points";
     String username = "root";
     String password = "";
 //    String url = "jdbc:mysql://54.90.156.7:3306/foker";
